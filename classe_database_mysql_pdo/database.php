@@ -7,7 +7,7 @@ interface DBInterface {
     public function setBindValues(array $args);
     public function executeSql(String $sql, array $args, bool $isKeyValue);
 
-    public function setSqlInsert($table,$args,$option);
+    public function setSqlInsert(String $table, array $args, bool $isKeyValue);
     public function insert(String $table, array $args,bool $isKeyValue);
 
 }
