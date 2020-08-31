@@ -89,7 +89,7 @@ class DB implements DBInterface {
     
 
     public function setSqlInsert(String $table, array $args, bool $isKeyValue){
-        if($option)
+        if($isKeyValue)
         {
             $keys = array_keys($args);
             $this->sql= "INSERT INTO $table (".implode(',',$keys).")VALUES(:".implode(',:',$keys).");";
@@ -103,11 +103,11 @@ class DB implements DBInterface {
 
     public function insert(String $table, array $args,bool $isKeyValue){
   
-        $this->setSqlInsert($table,$args,$option);
+        $this->setSqlInsert($table,$args,$isKeyValue);
 
         $this->stmt = $this->conn->prepare($this->sql);
  
-        if($option)
+        if($isKeyValue)
         {
             $this->setBindValues($args);  
         }
@@ -121,9 +121,3 @@ class DB implements DBInterface {
 
 }
 
-
-$db = new DB();
-
-$stmt = $db->conn->query("SELECT * FROM usuario");
-
-print_r($stmt->fetchAll());
